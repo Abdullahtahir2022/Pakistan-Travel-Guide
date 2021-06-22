@@ -1,5 +1,6 @@
 package com.example.quiz_app.Activities.activities;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.drawerlayout.widget.DrawerLayout;
@@ -7,6 +8,7 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.os.Build;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.widget.LinearLayout;
@@ -18,13 +20,20 @@ import com.example.quiz_app.R;
 import com.google.android.gms.common.util.ArrayUtils;
 import com.google.android.material.appbar.MaterialToolbar;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.SplittableRandom;
 
+@RequiresApi(api = Build.VERSION_CODES.R)
 public class MainActivity extends AppCompatActivity {
+
+
     ActionBarDrawerToggle actionBarDrawerToggle;
-    Quiz[] quizes = new Quiz[5];
+    private List<Quiz> quiz = new ArrayList<>();
+
+
 
 
     @Override
@@ -50,7 +59,15 @@ public class MainActivity extends AppCompatActivity {
     private void setupRecycleeView(){
         RecyclerView quizRecyclerview = findViewById(R.id.Rview);
         quizRecyclerview.setLayoutManager(new GridLayoutManager(this,2));
-        String[] quiz= {"Java","Python","Math","OOP","DB Systems","IR","ML","AI","NM","Probability","Web Tech","Coding"};
+        String[] quiz1= {"Java","Python","Math","OOP","DB Systems","IR","ML","AI","NM","Probability","Web Tech","Coding"};
+
+        quiz.add(new Quiz("1","Abdullah"));
+        quiz.add(new Quiz("2","Manzoor"));
+        quiz.add(new Quiz("3","Tallat"));
+        quiz.add(new Quiz("4","Talha"));
+
+
+
         quizRecyclerview.setAdapter(new quiz_adapter(quiz));
 
 

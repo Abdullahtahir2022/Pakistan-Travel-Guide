@@ -14,10 +14,12 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.quiz_app.Activities.models.Quiz;
 import com.example.quiz_app.R;
 
-public class quiz_adapter extends RecyclerView.Adapter<quiz_adapter.QuizViewHolder> {
-    String[] quizzes_data;
+import java.util.List;
 
-    public quiz_adapter(String[]  quizzes){
+public class quiz_adapter extends RecyclerView.Adapter<quiz_adapter.QuizViewHolder> {
+    List<Quiz> quizzes_data;
+
+    public quiz_adapter(List<Quiz> quizzes){
 
         quizzes_data = quizzes;
 
@@ -37,7 +39,7 @@ public class quiz_adapter extends RecyclerView.Adapter<quiz_adapter.QuizViewHold
 
     @Override
     public void onBindViewHolder(@NonNull QuizViewHolder holder, int position) {
-        String title1 = quizzes_data[position];
+        String title1 = quizzes_data.get(position).title;
         holder.title.setText(title1);
 
 
@@ -45,7 +47,7 @@ public class quiz_adapter extends RecyclerView.Adapter<quiz_adapter.QuizViewHold
 
     @Override
     public int getItemCount() {
-        return quizzes_data.length;
+        return quizzes_data.size();
     }
 
     public  class QuizViewHolder extends RecyclerView.ViewHolder{

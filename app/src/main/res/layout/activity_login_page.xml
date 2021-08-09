@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+
     tools:context=".Activities.activities.Login_page">
 
     <LinearLayout
@@ -20,20 +21,22 @@
 
         <TextView
             android:id="@+id/titlelogin"
-            android:textColor="@color/theme"
             style="@style/TextAppearance.AppCompat.Title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Login Now" />
+            android:fontFamily="sans-serif-black"
+            android:text="Pakistan Travel Guide"
+            android:textColor="@color/black"
+            android:textSize="30sp" />
 
         <TextView
-            android:layout_width="wrap_content"
-
             style="@style/TextAppearance.AppCompat.Body1"
+
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/theme"
-            android:text="Please Login  to continue using app"
-            android:layout_marginTop="8dp"/>
+            android:layout_marginTop="8dp"
+            android:text="Please Login"
+            android:textColor="@color/black" />
 
         <EditText
             android:id="@+id/emaillogin"
@@ -57,7 +60,7 @@
             android:ems="10"
             android:inputType="textPassword" />
 
-        <Button
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/buttonlogin"
             android:layout_width="match_parent"
             android:background="@drawable/btn"
@@ -81,6 +84,7 @@
         android:layout_height="200dp"
         android:scaleType="centerCrop"
         android:src="@drawable/ic_wave"
+
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />

@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.quiz_app">
-    <uses-permission android:name="android.permission.INTERNET"></uses-permission>
+
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
@@ -10,23 +11,18 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Quiz_App">
-        <activity android:name=".Activities.activities.SignupPage"></activity>
-        <activity android:name=".Activities.activities.Login_page" >
-
-        </activity>
-        <activity android:name=".Activities.activities.Login_Intro" >
-
+        <activity android:name=".Activities.activities.restaurants"></activity>
+        <activity android:name=".Activities.activities.cities" />
+        <activity android:name=".Activities.activities.SignupPage" />
+        <activity android:name=".Activities.activities.Login_page" />
+        <activity android:name=".Activities.activities.Login_Intro">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
-
         </activity>
-        <activity android:name=".Activities.activities.MainActivity">
-
-        </activity>
+        <activity android:name=".Activities.activities.MainActivity" />
     </application>
 
 </manifest>

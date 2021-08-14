@@ -1,6 +1,8 @@
 package com.example.quiz_app.Activities.utils;
 
-public class string_storage {
+import java.io.Serializable;
+
+public class string_storage implements Serializable {
 
     public String  x;
 

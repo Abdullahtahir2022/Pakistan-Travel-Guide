@@ -95,6 +95,7 @@
                     android:orientation="vertical">
 
                     <ImageView
+                        android:id="@+id/land_mark"
                         android:layout_width="80dp"
                         android:layout_height="80dp"
                         android:src="@drawable/ic_travel_guide" />
@@ -148,9 +149,10 @@
                     android:orientation="vertical">
 
                     <ImageView
+                        android:id="@+id/map"
                         android:layout_width="80dp"
                         android:layout_height="80dp"
-                        android:src="@drawable/ic_navigation"
+                        android:src="@drawable/ic_worldwide"
                         tools:ignore="DuplicateIds" />
 
                     <TextView
@@ -158,7 +160,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="center"
-                        android:text="Navigate" />
+                        android:text="Map" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -171,16 +173,17 @@
                     android:orientation="vertical">
 
                     <ImageView
+                        android:id="@+id/transport"
                         android:layout_width="80dp"
                         android:layout_height="80dp"
-                        android:src="@drawable/ic_coding" />
+                        android:src="@drawable/ic_transportation" />
 
                     <TextView
                         style="@style/TextAppearance.AppCompat.Body1"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="center"
-                        android:text="Travel Pakages" />
+                        android:text="Transportation" />
                 </LinearLayout>
             </LinearLayout>
         </LinearLayout>

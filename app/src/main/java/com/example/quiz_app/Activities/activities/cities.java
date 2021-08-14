@@ -1,5 +1,6 @@
 package com.example.quiz_app.Activities.activities;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
@@ -7,11 +8,14 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.Application;
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.util.Log;
 import android.util.Pair;
 import android.view.MenuItem;
@@ -25,6 +29,7 @@ import com.example.quiz_app.Activities.utils.string_storage;
 import com.example.quiz_app.R;
 import com.google.android.gms.common.util.ArrayUtils;
 import com.google.android.material.appbar.MaterialToolbar;
+import com.google.android.material.navigation.NavigationView;
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
@@ -44,7 +49,9 @@ import okhttp3.Request;
 import okhttp3.Response;
 
 @RequiresApi(api = Build.VERSION_CODES.R)
-public class cities extends AppCompatActivity {
+
+public class cities extends AppCompatActivity   {
+
 
 
     ActionBarDrawerToggle actionBarDrawerToggle;
@@ -55,8 +62,9 @@ public class cities extends AppCompatActivity {
 
 
     ArrayList<Tuple> hostel_coordinates = new ArrayList<Tuple>();
-    ArrayList<Tuple> land_coordinates = new ArrayList<>();
-    ArrayList<Tuple> Transport_cordinates = new ArrayList<>();
+    ArrayList<Tuple> land_coordinates = new ArrayList<Tuple>();
+    ArrayList<Tuple> Transport_cordinates = new ArrayList<Tuple>();
+    String city_req;
 
 //
 //    public ArrayList<Tuple> getArray1() {
@@ -84,18 +92,24 @@ public class cities extends AppCompatActivity {
         image = findViewById(R.id.City_display);
         System.out.println(city);
         if(city.equals("lahore")){
-
+            city_req = city;
         image.setBackgroundResource(R.drawable.lahore1);}
         if(city.equals("quetta")){
+            city_req = city;
             image.setBackgroundResource(R.drawable.quetta);}
         if(city.equals("peshawar")){
+            city_req = city;
             image.setBackgroundResource(R.drawable.peshawar);}
         if(city.equals("karachi")){
+            city_req =city;
             image.setBackgroundResource(R.drawable.karachi);}
         if(city.equals("islamabad") ){
+            city_req = city;
             image.setBackgroundResource(R.drawable.isb);}
         Toast.makeText(getApplicationContext(),"Please wait...",Toast.LENGTH_LONG).show();
         new api().execute();
+
+
 
 
 
@@ -104,10 +118,13 @@ public class cities extends AppCompatActivity {
 
 
 
-        class api extends AsyncTask<Void, Void, Response> {
+
+    class api extends AsyncTask<Void, Void, Response> {
 
 
             Response response;
+
+
             @Override
             protected Response doInBackground(Void... voids) {
 
@@ -116,24 +133,27 @@ public class cities extends AppCompatActivity {
 
                 OkHttpClient client = new OkHttpClient();
 
+
+
                 Request request = new Request.Builder()
-                        .url("https://hotels4.p.rapidapi.com/locations/search?query=lahore&locale=en_US")
+                        .url("https://hotels4.p.rapidapi.com/locations/search?query="+city_req+"&locale=en_US")
                         .get()
                         .addHeader("x-rapidapi-key", "f55a7d5474msh3c90a4ac2d6a2f9p1e67b7jsn865ef33b41f5")
                         .addHeader("x-rapidapi-host", "hotels4.p.rapidapi.com")
                         .build();
 
 
-
                 try {
-                    Response response = client.newCall(request).execute();
+                    Log.e("TAG", "IN" );
+                    response = client.newCall(request).execute();
+                    Log.e("TAG", "OUT" );
 
 
 
                 } catch (IOException e) {
-                    Log.e("TAG", "fail");
                     e.printStackTrace();
                 }
+
                 return response;
             }
             @Override
@@ -142,9 +162,8 @@ public class cities extends AppCompatActivity {
 
                 try {
                     String json;
-                    Log.e("TAG",response.body().string() );
                     json = response.body().string();
-                    Log.e("TAG", json );
+
 
                     JSONObject jsonObj = new JSONObject(json);
                     JSONArray array =(JSONArray)jsonObj.get("suggestions");
@@ -199,17 +218,54 @@ public class cities extends AppCompatActivity {
                     }
 
                     Toast.makeText(getApplicationContext(),"Ready to Use",Toast.LENGTH_SHORT).show();
-                    ImageView img;
-                    img = (ImageView) findViewById(R.id.restuarant);
+                    ImageView hotel_img,land_mark_img,transport_img,map;
+                    hotel_img = (ImageView) findViewById(R.id.restuarant);
+                    land_mark_img = (ImageView) findViewById(R.id.land_mark);
+                    transport_img = (ImageView) findViewById(R.id.transport);
+                    map = (ImageView) findViewById(R.id.map);
 
-
-
-
-                    img.setOnClickListener(new View.OnClickListener() {
+                    hotel_img.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
                             Intent intent = new Intent(cities.this, restaurants.class);
+                            intent.putExtra("hostel_coordinates",hostel_coordinates);
+                            intent.putExtra("hotels",hotels);
+
+
                             startActivity(intent);
+                        }
+                    });
+
+                    land_mark_img.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            Intent intent = new Intent(cities.this, land_mark.class);
+                            intent.putExtra("land_marks",land_marks);
+                            intent.putExtra("land_coordinates",land_coordinates);
+                            startActivity(intent);
+                        }
+                    });
+
+                    transport_img.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            Intent intent = new Intent(cities.this, transport.class);
+                            intent.putExtra("Transport_cordinates",Transport_cordinates);
+                            intent.putExtra("transport",transport);
+                            startActivity(intent);
+
+                        }
+                    });
+
+                    map.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            Uri gmmIntentUri = Uri.parse("geo:30.3753,69.3451");
+                            Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
+                            mapIntent.setPackage("com.google.android.apps.maps");
+                            if (mapIntent.resolveActivity(getPackageManager()) != null) {
+                                startActivity(mapIntent);
+                            }
                         }
                     });
 

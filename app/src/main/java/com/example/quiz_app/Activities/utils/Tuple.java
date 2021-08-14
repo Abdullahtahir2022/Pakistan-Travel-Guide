@@ -1,6 +1,8 @@
 package com.example.quiz_app.Activities.utils;
 
-public class Tuple {
+import java.io.Serializable;
+
+public class Tuple implements Serializable {
     public double x;
     public double y;
 
